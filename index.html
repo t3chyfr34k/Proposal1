@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Command ❤️</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Pacifico&display=swap');
+
+        body {
+            font-family: 'Pacifico', cursive;
+            text-align: center;
+            background: linear-gradient(to right, #FFB6C1, #FFC0CB);
+            color: #FF69B4;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: rgba(255, 182, 193, 0.9);
+            padding: 30px;
+            border-radius: 20px;
+            box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.3);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            padding: 15px 20px;
+            border: none;
+            border-radius: 10px;
+            font-size: 18px;
+            cursor: pointer;
+            transition: transform 0.2s, opacity 0.3s;
+            color: #FFFFFF;
+        }
+
+        .btn:hover {
+            opacity: 0.85;
+            transform: scale(1.05);
+        }
+
+        .yes { background: #FF69B4; }
+        .yesyes { background: #FF1493; }
+
+        .no-btn {
+            background: #8B0000;
+            position: relative;
+        }
+
+        .no-btn:hover {
+            animation: shake 0.3s infinite;
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(5px); }
+        }
+
+        .progress-container {
+            width: 100%;
+            background-color: #FFC0CB;
+            border-radius: 10px;
+            margin-top: 15px;
+            display: none;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 20px;
+            background-color: #FF1493;
+            border-radius: 10px;
+        }
+
+        #response {
+            font-size: 22px;
+            margin-top: 15px;
+            color: #D81B60;
+        }
+
+        .pickup-box {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 15px;
+            background: #FFC0CB;
+        }
+
+        .message-box {
+            margin-top: 20px;
+        }
+
+        .message-input {
+            width: calc(100% - 22px);
+            padding: 10px;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .send-btn {
+            background: #FF1493;
+            color: #FFFFFF;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-size: 18px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>You WILL Be My Valentine! 💖</h1>
+
+        <div class="btn-group">
+            <button class="btn yes" onclick="startLove('yes')">Yes</button>
+            <button class="btn yesyes" onclick="startLove('yesyes')">Absolutely!!</button>
+        </div>
+
+        <button class="btn no-btn" onmouseover="showNoMessage()" onclick="showNoMessage()">No</button>
+
+        <div class="progress-container">
+            <div class="progress-bar"></div>
+        </div>
+
+        <p id="response"></p>
+
+        <div class="pickup-box">
+            <p id="pickup">Click below to be impressed! 🔥</p>
+            <button class="btn" onclick="generatePickup()">Impress Me</button>
+        </div>
+
+        <div class="message-box">
+            <input type="text" id="message" class="message-input" placeholder="You wanna say something?">
+            <a id="mailto-link" class="btn send-btn" href="#">Send</a>
+        </div>
+    </div>
+
+    <script>
+        function startLove(option) {
+            document.querySelector(".progress-container").style.display = "block";
+            let progressBar = document.querySelector(".progress-bar");
+            progressBar.style.width = "0%";
+            let width = 0;
+            let interval = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(interval);
+                    let responseText = option === 'yes' ? "I luv yew ❣️" : "I luv yew more than you do 💋";
+                    document.getElementById('response').innerHTML = responseText;
+                } else {
+                    width += 10;
+                    progressBar.style.width = width + "%";
+                }
+            }, 200);
+        }
+
+        function showNoMessage() {
+            alert("Oops! You don’t have permission to say no! 😜");
+        }
+
+        function generatePickup() {
+            const pickups = [
+                "Roses are red, violets are blue, let's get together and make dreams come true. 🌹💫",
+                "Do you have a map? Because I keep getting lost in your eyes. 🗺️👀",
+                "Is your name Google? Because you have everything I've been searching for. 🔍❤️",
+                "Do you have a Band-Aid? Because I just scraped my knee falling for you. 🩹😍"
+            ];
+            document.getElementById('pickup').innerText = pickups[Math.floor(Math.random() * pickups.length)];
+        }
+
+        document.getElementById('mailto-link').addEventListener('click', function() {
+            const message = document.getElementById('message').value;
+            const mailtoLink = `mailto:djshyamdr15@gmail.com?subject=Valentine's Message&body=${encodeURIComponent(message)}`;
+            window.location.href = mailtoLink;
+        });
+    </script>
+
+</body>
+</html>
